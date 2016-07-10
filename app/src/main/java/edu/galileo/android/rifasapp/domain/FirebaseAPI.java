@@ -1,9 +1,16 @@
 package edu.galileo.android.rifasapp.domain;
 
+import android.support.annotation.NonNull;
+
 import com.firebase.client.AuthData;
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Map;
 
@@ -14,45 +21,45 @@ import java.util.Map;
 public class FirebaseAPI {
     private Firebase firebase;
     private ChildEventListener rifasEventListener;
+    private FirebaseAuth firebaseAuth;
 
     public FirebaseAPI(Firebase firebase) {
         this.firebase = firebase;
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     public void logout(){
-        firebase.unauth();
+        firebaseAuth.signOut();
     }
 
     public void login(String email, String password, final FirebaseActionListenerCallback listener){
-        firebase.authWithPassword(email, password, new Firebase.AuthResultHandler() {
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onAuthenticated(AuthData authData) {
-                listener.onSuccess();
-            }
-
-            @Override
-            public void onAuthenticationError(FirebaseError firebaseError) {
-                listener.onError(firebaseError);
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    listener.onSuccess();
+                }else{
+                    listener.onError(new FirebaseError(0,task.getException().toString()));
+                }
             }
         });
     }
 
     public void signup(String email, String password, final FirebaseActionListenerCallback listener){
-        firebase.createUser(email, password, new Firebase.ValueResultHandler<Map<String, Object>>() {
+        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onSuccess(Map<String, Object> result) {
-                listener.onSuccess();
-            }
-
-            @Override
-            public void onError(FirebaseError firebaseError) {
-                listener.onError(firebaseError);
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    listener.onSuccess();
+                }else{
+                    listener.onError(new FirebaseError(0,task.getException().toString()));
+                }
             }
         });
     }
 
     public void checkForSession(FirebaseActionListenerCallback listener) {
-        if (firebase.getAuth() != null) {
+        if (firebaseAuth.getCurrentUser() != null) {
             listener.onSuccess();
         } else {
             listener.onError(null);
@@ -61,9 +68,8 @@ public class FirebaseAPI {
 
     public String getAuthEmail(){
         String email = null;
-        if (firebase.getAuth() != null) {
-            Map<String, Object> providerData = firebase.getAuth().getProviderData();
-            email = providerData.get("email").toString();
+        if (firebaseAuth.getCurrentUser() != null) {
+            email = firebaseAuth.getCurrentUser().getEmail();
         }
         return email;
     }
