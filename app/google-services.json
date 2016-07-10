@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1052577405772",
+    "firebase_url": "https://rifas-603bf.firebaseio.com",
+    "project_id": "rifas-603bf",
+    "storage_bucket": "rifas-603bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052577405772:android:fe8d1750cf8a583f",
+        "android_client_info": {
+          "package_name": "edu.galileo.android.rifasapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052577405772-bj82i32a092em3effdvtee8s4edc6vcq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4O7Ow5W4q6v60MCo11JBEDjKu1TxaFzE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
