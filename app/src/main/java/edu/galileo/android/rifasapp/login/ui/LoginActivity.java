@@ -16,7 +16,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import edu.galileo.android.rifasapp.MainActivity;
+import edu.galileo.android.rifasapp.main.ui.MainActivity;
 import edu.galileo.android.rifasapp.R;
 import edu.galileo.android.rifasapp.RifasApp;
 import edu.galileo.android.rifasapp.login.LoginPresenter;
