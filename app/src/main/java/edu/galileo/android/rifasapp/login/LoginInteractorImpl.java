@@ -5,7 +5,7 @@ package edu.galileo.android.rifasapp.login;
  */
 
 public class LoginInteractorImpl implements LoginInteractor {
-    private LoginRepository loginRepository;
+    LoginRepository loginRepository;
 
     public LoginInteractorImpl(LoginRepository loginRepository) {
         this.loginRepository = loginRepository;

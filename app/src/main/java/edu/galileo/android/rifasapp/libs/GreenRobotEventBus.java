@@ -9,8 +9,8 @@ import edu.galileo.android.rifasapp.libs.base.EventBus;
 public class GreenRobotEventBus implements EventBus {
     org.greenrobot.eventbus.EventBus eventBus;
 
-    public GreenRobotEventBus(org.greenrobot.eventbus.EventBus eventBus) {
-        this.eventBus = eventBus;
+    public GreenRobotEventBus() {
+        this.eventBus = org.greenrobot.eventbus.EventBus.getDefault();
     }
 
     public void register(Object subscriber){

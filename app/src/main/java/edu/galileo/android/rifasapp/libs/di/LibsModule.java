@@ -1,5 +1,6 @@
 package edu.galileo.android.rifasapp.libs.di;
 
+import android.app.Activity;
 import android.app.Fragment;
 
 import javax.inject.Singleton;
@@ -14,22 +15,22 @@ import edu.galileo.android.rifasapp.libs.base.EventBus;
  */
 @Module
 public class LibsModule {
-    private Fragment fragment;
+    private Activity activity;
 
-    public LibsModule(Fragment fragment) {
-        this.fragment = fragment;
+    public LibsModule(Activity activity) {
+        this.activity = activity;
     }
 
     @Provides
     @Singleton
-    Fragment providesFragment(){
-        return this.fragment;
+    Activity providesActivity(){
+        return this.activity;
     }
 
     @Provides
     @Singleton
-    EventBus providesEventBus(org.greenrobot.eventbus.EventBus eventBus){
-        return new GreenRobotEventBus(eventBus);
+    EventBus providesEventBus(){
+        return new GreenRobotEventBus();
     }
 
     @Provides

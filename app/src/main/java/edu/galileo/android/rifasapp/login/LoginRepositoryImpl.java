@@ -12,8 +12,8 @@ import edu.galileo.android.rifasapp.login.events.LoginEvent;
  */
 
 public class LoginRepositoryImpl implements LoginRepository {
-    private EventBus eventBus;
-    private FirebaseAPI firebase;
+    EventBus eventBus;
+    FirebaseAPI firebase;
 
     public LoginRepositoryImpl(EventBus eventBus, FirebaseAPI firebase) {
         this.eventBus = eventBus;

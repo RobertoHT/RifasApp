@@ -10,6 +10,11 @@ import edu.galileo.android.rifasapp.login.di.DaggerLoginComponent;
 import edu.galileo.android.rifasapp.login.di.LoginComponent;
 import edu.galileo.android.rifasapp.login.di.LoginModule;
 import edu.galileo.android.rifasapp.login.ui.LoginView;
+import edu.galileo.android.rifasapp.main.di.DaggerMainComponent;
+import edu.galileo.android.rifasapp.main.di.MainComponent;
+import edu.galileo.android.rifasapp.main.di.MainModule;
+import edu.galileo.android.rifasapp.main.ui.MainView;
+import edu.galileo.android.rifasapp.main.ui.adapters.OnItemClickListener;
 
 /**
  * Created by Roberto Hdez. on 10/07/16.
@@ -54,6 +59,16 @@ public class RifasApp extends Application {
                 .domainModule(domainModule)
                 .libsModule(new LibsModule(null))
                 .loginModule(new LoginModule(view))
+                .build();
+    }
+
+    public MainComponent getMainComponent(MainView view, OnItemClickListener onItemClickListener){
+        return DaggerMainComponent
+                .builder()
+                .rifasAppModule(rifasAppModule)
+                .domainModule(domainModule)
+                .libsModule(new LibsModule(null))
+                .mainModule(new MainModule(view, onItemClickListener))
                 .build();
     }
 }
